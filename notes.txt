@@ -1,0 +1,5 @@
+https://pubs.opengroup.org/onlinepubs/009604599/functions/pthread_cond_timedwait.html
+says that both pthread_cond_wait() and pthread_cond_timedwait() whould not return EINTR.
+But linux man page says pthread_cond_timedwait can return EINTR.
+Testing on Debian 7.11 and Ubuntu 22.04 shows that EINTR is not returned
+upon receiving SIGINT.
