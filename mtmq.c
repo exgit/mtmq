@@ -14,9 +14,13 @@
 /* Clock type to use when waiting on condition variable.
  *
  * Use of CLOCK_MONOTONIC ensures waiting does not hang if
- * host time is set back in time.
+ * host time is set back in time. But it isn't supported on MinGW.
  */
-#define MTMQ_CLOCK_TYPE CLOCK_MONOTONIC
+#ifdef _WIN32
+#   define MTMQ_CLOCK_TYPE CLOCK_REALTIME
+#else
+#   define MTMQ_CLOCK_TYPE CLOCK_MONOTONIC
+#endif
 
 
 // Queue element.

@@ -22,11 +22,15 @@ static void *thread_rd(void *data);
 
 int main()
 {
+#ifdef _WIN32
+    signal(SIGINT, sig_handler);
+#else
     struct sigaction sa;
     sigemptyset(&sa.sa_mask);
     sa.sa_flags = 0;
     sa.sa_handler = sig_handler;
     sigaction(SIGINT, &sa, NULL);
+#endif
     printf("Press Ctrl-C to exit.\n");
 
     queue = mtmq_create(5);
